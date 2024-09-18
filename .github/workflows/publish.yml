@@ -36,7 +36,6 @@ jobs:
       - name: Build project for Windows
         run: dotnet publish --self-contained -r win-x64 -p:PublishSingleFile=true -c Release -o ./publish/windows
 
-
       - name: List root directory
         run: ls -la ./
 
@@ -59,4 +58,6 @@ jobs:
 
       - name: Create Release
         run: |
-          gh release create latest_release ./publish/linux/* ./publish/windows/* -t "Release latest_release"
+          # Add only the specific files needed for the release, excluding any unnecessary files
+          gh release create latest_release ./publish/linux/*appsettings.json ./publish/linux/* -t "Release latest_release (Linux)"
+          gh release create latest_release ./publish/windows/*appsettings.json ./publish/windows/* -t "Release latest_release (Windows)"
