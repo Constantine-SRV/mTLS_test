@@ -36,11 +36,6 @@ jobs:
       - name: Build project for Windows
         run: dotnet publish --self-contained -r win-x64 -p:PublishSingleFile=true -c Release -o ./publish/windows
 
-      - name: Copy appsettings.json for Linux
-        run: cp appsettings.json ./publish/linux/
-
-      - name: Copy appsettings.json for Windows
-        run: cp appsettings.json ./publish/windows/
 
       - name: List root directory
         run: ls -la ./
