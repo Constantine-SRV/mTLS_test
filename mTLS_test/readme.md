@@ -1,7 +1,7 @@
 
 # Project Overview: mTLS Authentication Demonstration
 
-This project demonstrates the capabilities of **mTLS (mutual TLS) authentication**.  
+This project (one page script) demonstrates the capabilities of **mTLS (mutual TLS) authentication**.  
 It implements two-way certificate validation (both client and server), providing a high level of security and data protection.
 
 ## Main Features:
