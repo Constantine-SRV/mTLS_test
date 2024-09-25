@@ -36,7 +36,6 @@ jobs:
       - name: Build project for Windows
         run: dotnet publish --self-contained -r win-x64 -p:PublishSingleFile=true -c Release -o ./publish/windows
 
-
       - name: List root directory
         run: ls -la ./
 
@@ -51,12 +50,22 @@ jobs:
       - name: Authenticate GitHub CLI
         run: echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
 
-      - name: Delete existing release if exists
+      - name: Delete existing Linux release if exists
         run: |
-          if gh release view latest_release; then
-            gh release delete latest_release -y
+          if gh release view latest_release_linux; then
+            gh release delete latest_release_linux -y
           fi
 
-      - name: Create Release
+      - name: Delete existing Windows release if exists
         run: |
-          gh release create latest_release ./publish/linux/* ./publish/windows/* -t "Release latest_release"
+          if gh release view latest_release_windows; then
+            gh release delete latest_release_windows -y
+          fi
+
+      - name: Create Linux Release
+        run: |
+          gh release create latest_release_linux ./publish/linux/* -t "Release latest_release_linux"
+
+      - name: Create Windows Release
+        run: |
+          gh release create latest_release_windows ./publish/windows/* -t "Release latest_release_windows"
